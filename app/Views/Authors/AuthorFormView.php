@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Views\Books;
+namespace App\Views\Authors;
 
 use App\Views\Layout\LayoutView;
 
-class BookFormView
+class AuthorFormView
 {
-    private array $book;
+    private array $author;
 
-    public function __construct(array $book)
+    public function __construct(array $author)
     {
-        $this->book = $book;
+        $this->author = $author;
     }
 
     public function render(): string
@@ -19,7 +19,7 @@ class BookFormView
 
         <style>
 
-        .book-form-container{
+        .author-form-container{
             max-width:900px;
             margin:40px auto;
             background:white;
@@ -30,7 +30,7 @@ class BookFormView
             gap:40px;
         }
 
-        .book-cover{
+        .author-cover{
             width:250px;
             border-radius:10px;
             box-shadow:0 4px 15px rgba(0,0,0,0.3);
@@ -86,26 +86,21 @@ class BookFormView
         }
 
         </style>
+        <div class="author-form-container">
 
-        <div class="book-form-container">
 
-            <img src="{$this->book['photo']}" class="book-cover">
+            <form method="post" action="/authors/edit/{$this->author['id']}" class="form-section">
 
-            <form method="post" action="/books/edit/{$this->book['id']}" class="form-section">
+                <label>Szerző neve</label>
+                <input type="text" name="name" value="{$this->author['name']}" required>
 
-                <label>Könyv neve</label>
-                <input type="text" name="name" value="{$this->book['name']}" required>
-
-                <label>Megjelenési év</label>
-                <input type="number" name="release_year" value="{$this->book['release_year']}">
-
-                <label>Leírás</label>
-                <textarea name="description" rows="6">{$this->book['description']}</textarea>
+                <label>Bio</label>
+                <textarea name="bio" rows="6">{$this->author['bio']}</textarea>
 
                 <div class="form-buttons">
                     <button type="submit" class="btn btn-save">Mentés</button>
-                    <a href="/books" class="btn btn-back">Vissza</a>
-                    <a href="/books/delete/{$this->book['id']}" class="btn btn-delete">Törlés</a>
+                    <a href="/authors" class="btn btn-back">Vissza</a>
+                    <a href="/authors/delete/{$this->author['id']}" class="btn btn-delete">Törlés</a>
                 </div>
 
             </form>
@@ -114,6 +109,8 @@ class BookFormView
 
         HTML;
 
-        return (new LayoutView($content, $this->book['name']))->render();
+        return (new LayoutView($content, $this->author['name']))->render();
     }
+    
 }
+

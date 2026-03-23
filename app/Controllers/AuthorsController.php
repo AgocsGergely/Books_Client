@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Http\ApiRequest;
 use App\Views\Authors\AuthorsView;
 use App\Views\Authors\BookFormView;
+use App\Views\Authors\AuthorFormView;
 
 class AuthorsController
 {
@@ -49,8 +50,8 @@ class AuthorsController
             exit;
         }
 
-        $book = $this->api->get("/authors/$id");
-        return (new AuthorFormView($book))->render();
+        $author = $this->api->get("/authors/$id");
+        return (new AuthorFormView($author))->render();
     }
 
     public function delete(?int $id): void
