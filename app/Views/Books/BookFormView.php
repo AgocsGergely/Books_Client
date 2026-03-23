@@ -96,7 +96,7 @@ class BookFormView
                 <label>Könyv neve</label>
                 <input type="text" name="name" value="{$this->book['name']}" required>
 
-                <label>Megjelenési év</label>
+                <label>Megjelenési Év</label>
                 <input type="number" name="release_year" value="{$this->book['release_year']}">
 
                 <label>Leírás</label>
