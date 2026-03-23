@@ -3,10 +3,10 @@
 namespace App\Controllers;
 
 use App\Http\ApiRequest;
-use App\Views\Books\BooksView;
-use App\Views\Books\BookFormView;
+use App\Views\Authors\AuthorsView;
+use App\Views\Authors\BookFormView;
 
-class BooksController
+class AuthorsController
 {
     private ApiRequest $api;
 
@@ -17,47 +17,47 @@ class BooksController
 
     public function index(): string
     {
-        $books = $this->api->get("/books");
-        return (new BooksView($books))->render();
+        $authors = $this->api->get("/authors");
+        return (new AuthorsView($authors))->render();
     }
 
     public function create(): string
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $this->api->post("/books", [
+            $this->api->post("/authors", [
                 "name" => $_POST["name"]
                 
             ]);
 
-            header("Location: /books");
+            header("Location: /authors");
             exit;
         }
 
-        return (new BookFormView())->render();
+        return (new AuthorFormView())->render();
     }
 
     public function edit(?int $id): string
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $this->api->put("/books/$id", [
+            $this->api->put("/authors/$id", [
                 "name" => $_POST["name"],
                 "release_year" => $_POST["release_year"],
                 "description" => $_POST["description"]
             ]);
 
-            header("Location: /books");
+            header("Location: /authors");
             exit;
         }
 
-        $book = $this->api->get("/books/$id");
-        return (new BookFormView($book))->render();
+        $book = $this->api->get("/authors/$id");
+        return (new AuthorFormView($book))->render();
     }
 
     public function delete(?int $id): void
     {
-        $this->api->delete("/books/$id");
+        $this->api->delete("/authors/$id");
 
-        header("Location: /books");
+        header("Location: /authors");
         exit;
     }
 }
