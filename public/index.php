@@ -2,7 +2,7 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use app\Router\Router;
+use App\Router\Router;
 
 // Router
 $router = new Router();

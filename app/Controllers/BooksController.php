@@ -3,8 +3,8 @@
 namespace App\Controllers;
 
 use App\Http\ApiRequest;
-use App\Views\Counties\BooksView;
-use App\Views\Counties\BookFormView;
+use App\Views\Books\BooksView;
+use App\Views\Books\BookFormView;
 
 class BooksController
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Views\Counties;
+namespace App\Views\Books;
 
 use App\Views\Layout\LayoutView;
 
