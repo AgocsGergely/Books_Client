@@ -26,6 +26,7 @@ class BooksController
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->api->post("/books", [
                 "name" => $_POST["name"]
+                
             ]);
 
             header("Location: /books");
@@ -39,7 +40,9 @@ class BooksController
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->api->put("/books/$id", [
-                "name" => $_POST["name"]
+                "name" => $_POST["name"],
+                "release_year" => $_POST["release_year"],
+                "description" => $_POST["description"]
             ]);
 
             header("Location: /books");
