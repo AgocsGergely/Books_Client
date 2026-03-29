@@ -42,7 +42,7 @@ class LayoutView
         <nav class="navbar">
             <a href="/books">Könyvek</a>
             <a href="/authors">Írok</a>
-            <a href="/authors">Kategóriák</a>
+            <a href="/categories">Kategóriák</a>
             <a href="/publishers">Kiadók</a>
             <a href="/series">Szériák</a>
         </nav>
