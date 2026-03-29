@@ -1,3 +1,4 @@
+<?php
 namespace App\Controllers;
 
 use App\Http\ApiRequest;
