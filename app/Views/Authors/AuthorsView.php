@@ -17,6 +17,7 @@ class AuthorsView
 
     public function render(): string
     {
+        
         $cards = "";
 
         unset($this->authors['code']);
@@ -87,22 +88,11 @@ class AuthorsView
         </style>
 
         <h1>Könyvek</h1>
-        {$this->renderSearchBar()}
         <div class="authors-grid">
             $cards
         </div>
         HTML;
 
         return (new LayoutView($content, "Könyvek"))->render();
-    }
-    private function renderSearchBar(): string
-    {
-        return <<<HTML
-        <form method="get" action="/authors" class="search-bar">
-            <input type="search" name="needle" placeholder="Keresés..." class="search-input">
-            <button type="submit" class="btn btn-secondary">Keres</button>
-        </form>
-        <br>
-        HTML;
     }
 }
