@@ -26,7 +26,6 @@ class PublishersController
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->api->post("/publishers", [
                 "name" => $_POST["name"],
-                "address" => $_POST["address"] ?? null
             ]);
 
             header("Location: /publishers");
@@ -41,7 +40,6 @@ class PublishersController
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->api->put("/publishers/$id", [
                 "name" => $_POST["name"],
-                "address" => $_POST["address"] ?? null
             ]);
 
             header("Location: /publishers");
