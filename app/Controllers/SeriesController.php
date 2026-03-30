@@ -24,8 +24,7 @@ class SeriesController
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->api->post("/series", [
-                "title" => $_POST["title"],
-                "description" => $_POST["description"] ?? null
+                "name" => $_POST["name"],
             ]);
 
             header("Location: /series");
