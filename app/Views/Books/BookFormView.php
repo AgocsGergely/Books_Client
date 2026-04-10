@@ -96,13 +96,13 @@ class BookFormView
                 <textarea name="description" rows="6">{$this->book['description']}</textarea>
 
                 <label>Kép URL</label>
-                <textarea name="description" rows="6">{$this->book['photo']}</textarea>
+                <textarea name="photo" rows="6">{$this->book['photo']}</textarea>
 
                 <label>Széria sorszám</label>
-                <textarea name="description" rows="6">{$this->book['series_num']}</textarea>
+                <input type="number"name="series_num" value="{$this->book['series_num']}">
 
                 <div class="form-buttons">
-                    <button type="submit" class="btn btn-save">Mentés módosításai</button>
+                    <button type="submit" class="btn btn-save">Mentés</button>
                     <a href="/books" class="btn btn-back">Vissza</a>
                     <a href="/books/delete/{$this->book['id']}" class="btn btn-delete">Törlés</a>
                 </div>
@@ -110,6 +110,7 @@ class BookFormView
         </div>
         HTML;
 
+        echo "<script>console.log('Book data:', " . json_encode($this->book) . ");</script>";
         return (new LayoutView($content, $this->book['name']))->render();
     }
 }
