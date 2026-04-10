@@ -29,7 +29,7 @@ class CategoriesView
         $content = <<<HTML
         <div style="max-width:800px; margin: 20px auto;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-                <h1>Kategóriák</h1>
+                <h1 style="text-align:center;">Kategóriák</h1>
                 <a href="/categories/create" style="background:#007bff; color:white; padding:10px 20px; border-radius:6px; text-decoration:none;">+ Új kategória</a>
             </div>
             $list

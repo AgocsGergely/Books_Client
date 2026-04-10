@@ -26,8 +26,8 @@ class AuthorsController
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $this->api->post("/authors", [
-                "name" => $_POST["name"]
-                
+                "name" => $_POST["name"],
+                "bio" => $_POST["bio"]
             ]);
 
             header("Location: /authors");

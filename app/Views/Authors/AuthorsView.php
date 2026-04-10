@@ -17,16 +17,13 @@ class AuthorsView
 
     public function render(): string
     {
-        
         $cards = "";
 
         unset($this->authors['code']);
         
         foreach ($this->authors as $author) {
-
             $cards .= <<<HTML
-            <a href="/authors/edit/{$author['id']}" class="author-card" style="">
-                <!--<img src="" alt="{$author['name']}"> -->
+            <a href="/authors/edit/{$author['id']}" class="author-card">
                 <div class="author-info">
                     <h3>{$author['name']}</h3>
                 </div>
@@ -36,6 +33,25 @@ class AuthorsView
 
         $content = <<<HTML
         <style>
+        .authors-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .btn-create {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .btn-create:hover {
+            background: #0056b3;
+        }
 
         .authors-grid{
             display:grid;
@@ -45,10 +61,10 @@ class AuthorsView
         }
 
         .author-card{
-            display: flex;               /* make it a flex container */
-            flex-direction: column;      /* stack content vertically */
-            justify-content: center;     /* center vertically */
-            align-items: center;         /* center horizontally */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-decoration:none;
             color:black;
             border-radius:10px;
@@ -56,43 +72,40 @@ class AuthorsView
             background:white;
             box-shadow:0 4px 10px rgba(0,0,0,0.15);
             transition:transform .2s, box-shadow .2s;
+            min-height: 100px; /* Biztosítja, hogy legyen magassága a kártyának */
         }
-
 
         .author-card:hover{
             transform:translateY(-5px);
             box-shadow:0 8px 20px rgba(0,0,0,0.25);
         }
 
-        .author-card img{
-            width:100%;
-            height:280px;
-            object-fit:cover;
-        }
-
         .author-info {
             padding: 10px;
             display: flex;
             flex-direction: column;
-            justify-content: center;   /* vertical centering */
-            align-items: center;       /* horizontal centering */
-            height: 100%;              /* fill the card */
+            justify-content: center;
+            align-items: center;
+            height: 100%;
         }
-
 
         .author-info h3 {
             font-size: 16px;
             margin: 0;
+            text-align: center;
         }
-
         </style>
 
-        <h1>Könyvek</h1>
+        <div class="authors-header">
+            <h1>Szerzők</h1>
+            <a href="/authors/create" class="btn-create">+ Új szerző</a>
+        </div>
+
         <div class="authors-grid">
             $cards
         </div>
         HTML;
 
-        return (new LayoutView($content, "Könyvek"))->render();
+        return (new LayoutView($content, "Szerzők"))->render();
     }
 }

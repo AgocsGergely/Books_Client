@@ -21,20 +21,49 @@ class BooksController
         return (new BooksView($books))->render();
     }
 
-    public function create(): string
-    {
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $this->api->post("/books", [
-                "name" => $_POST["name"]
-                
-            ]);
+   public function create(): string
+{
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        
+        // Segédfüggvény az üres stringek NULL-ra alakításához (hogy az API ne kapjon hibás adatot)
+        $toNullableInt = function($value) {
+            return (isset($value) && $value !== '') ? (int)$value : null;
+        };
 
-            header("Location: /books");
-            exit;
-        }
+        $data = [
+            "id"           => $toNullableInt($_POST["id"]), // Ha manuális ISBN/ID kell
+            "name"         => $_POST["name"] ?? null,
+            "release_year" => $toNullableInt($_POST["release_year"]),
+            "description"  => $_POST["description"] ?? '',
+            "photo"        => $_POST["photo"] ?? '',
+            "series_num"   => $toNullableInt($_POST["series_num"]),
+            "author_id"    => $toNullableInt($_POST["author_id"]),
+            "category_id"  => $toNullableInt($_POST["category_id"]),
+            "publisher_id" => $toNullableInt($_POST["publisher_id"]),
+            "series_id"    => $toNullableInt($_POST["series_id"]),
+        ];
 
-        return (new BookFormView())->render();
+        $this->api->post("/books", $data);
+
+        header("Location: /books");
+        exit;
     }
+
+    // Listák lekérése a legördülő menükhöz (Comboboxokhoz)
+    $authors    = $this->api->get("/authors");
+    $categories = $this->api->get("/categories");
+    $publishers = $this->api->get("/publishers");
+    $series     = $this->api->get("/series");
+
+    // Üres tömbbel hívjuk meg a könyv adatot, de átadjuk a segédlistákat
+    return (new BookFormView(
+        [], 
+        $authors, 
+        $categories, 
+        $publishers, 
+        $series
+    ))->render();
+}
 
     public function edit(?int $id): string
     {
